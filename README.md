@@ -28,13 +28,13 @@ assert comma_separated_numbers(3456.3) == '3,456.3'
 
 ```python
 print get_next_dates(date(2014, 5, 1), 2, 1, 0)
-*[date(2014, 6, 1), date(2014, 7, 1)]*
+==[date(2014, 6, 1), date(2014, 7, 1)]
 print get_next_dates(date(2014, 5, 2), 3, 0, 3)
-*[date(2014, 5, 2), date(2014, 6, 1), date(2014, 7, 1)]*
+==[date(2014, 5, 2), date(2014, 6, 1), date(2014, 7, 1)]
 print get_next_dates(date(2014, 5, 10), 3, 0, 3)
-*[date(2014, 6, 1), date(2014, 7, 1), date(2014, 8, 1)]*
+==[date(2014, 6, 1), date(2014, 7, 1), date(2014, 8, 1)]
 print get_next_dates(date(2014, 5, 30), 3, 1, -3)
-*[date(2014, 7, 1), date(2014, 8, 1), date(2014, 9, 1)]*
+==[date(2014, 7, 1), date(2014, 8, 1), date(2014, 9, 1)]
 ```
 ##Django boilerplate
 
