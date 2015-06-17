@@ -2,11 +2,12 @@
 
 ##Flatten:
 
-1. print flatten([['a', 'b'], ['c', ['d', 'e',], ['f'], 'g']])
-    1. ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-2. print flatten([['a', 'b'], 'a', ['a', 'b',], ['a'], 'b'])
-    1. ['a', 'b', 'a', 'a', 'b', 'a', 'b'i]
-
+```python
+print flatten([['a', 'b'], ['c', ['d', 'e',], ['f'], 'g']])
+== ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+print flatten([['a', 'b'], 'a', ['a', 'b',], ['a'], 'b'])
+== ['a', 'b', 'a', 'a', 'b', 'a', 'b']
+```
 ##Comma separated values
 ```python
 assert comma_separated_numbers(3456) == '3,456'
@@ -23,8 +24,8 @@ assert comma_separated_numbers(3456.3) == '3,456.3'
 1. **count**: number of dates to return
 2. **month offset**: how many months to move ahead from base_date
 3. **day cutoff**: day of the month to roll over to the next month positive number means on that day of month, roll over negative number means on that number of days from the end of the month, roll over 0 means rolling over on the last day of the month
-*day_cutoff must be taken into account before the month month_offset*
-*after rolling over to another month after base_date.month, all dates must be first of month.*
+4. *day_cutoff must be taken into account before the month month_offset*
+5. *after rolling over to another month after base_date.month, all dates must be first of month.*
 
 ```python
 print get_next_dates(date(2014, 5, 1), 2, 1, 0)
