@@ -36,6 +36,7 @@ print get_next_dates(date(2014, 5, 10), 3, 0, 3)
 ==[date(2014, 6, 1), date(2014, 7, 1), date(2014, 8, 1)]
 print get_next_dates(date(2014, 5, 30), 3, 1, -3)
 ==[date(2014, 7, 1), date(2014, 8, 1), date(2014, 9, 1)]
+**This result seems to be incorrect, should be 2014, 7, 3 to my calculation**
 ```
 ##Django boilerplate
 
