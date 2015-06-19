@@ -54,6 +54,26 @@ class GetNextDate(object):
     def __init__(self):
         pass
 
+    def add_day(self, year, month, day, day_cutoff):
+        if day < self.cutoff(year, month, day_cutoff):
+            day += 1
+        else:
+            day = 1
+            if month < 12:
+                month += 1
+            else:
+                month = 1
+                year += 1
+        return(year, month, day)
+
+    def add_month(self, year, month):
+        if month < 12:
+            month += 1
+        else:
+            month = 1
+            year += 1
+        return (year, month)
+
     def calculate_day_cutoff(self, day_cutoff, in_date):
         if day_cutoff == 0:
             day_cutoff = calendar.monthrange(in_date.year, in_date.month)[1]
@@ -61,8 +81,8 @@ class GetNextDate(object):
             day_cutoff = (calendar.monthrange(in_date.year, in_date.month)[1] + day_cutoff)
         return day_cutoff
 
-    def cutoff(self, in_date, day_cutoff):
-        return min(calendar.monthrange(in_date.year, in_date.month)[1], day_cutoff)
+    def cutoff(self, year, month, day_cutoff):
+        return min(calendar.monthrange(year, month)[1], day_cutoff)
 
     def calculate_month_offset(self, in_date, month_offset, day_cutoff):
         """
@@ -73,39 +93,38 @@ class GetNextDate(object):
         month = in_date.month
         year = in_date.year
 
-        total_day_offset = month_offset * (365//12)
+        total_day_offset = month_offset * (31)
+
         for x in range(total_day_offset):
-            if day >= self.cutoff(date(year, month, day+1), day_cutoff):
-                day += 1
-            else:
-                day = 1
-                if (month + 1) <= 12:
-                    month += 1
-                else:
-                    month = 1
-                    year += 1
+            tmp = self.add_day(year, month, day, day_cutoff)
+            year = tmp[0]
+            month = tmp[1]
+            day = tmp[2]
         return date(year, month, day)
 
+    def create_month_list(self, month_list, count, year, month):
+        for x in range(count - 1):
+            tmp = self.add_month(year, month)
+            year = tmp[0]
+            month = tmp[1]
+            month_list.append(date(year, month, 1))
+        return month_list
+
     def get_next_dates(self, in_date, count, month_offset, day_cutoff):
+
         day_cutoff = self.calculate_day_cutoff(day_cutoff, in_date)
 
         month_list = []
 
-        if month_offset == 0:
+        if month_offset == 0 and day_cutoff >= in_date.day:
             month_list.append(in_date)
-        elif month_offset > 0:
+        elif month_offset == 0 and day_cutoff < in_date.day:
+            self.create_month_list(month_list, 2, in_date.year, in_date.month)
+        else:  # month_offset > 0
             month_list.append(self.calculate_month_offset(in_date, month_offset, day_cutoff))
 
         month = month_list[0].month
         year = month_list[0].year
 
-        if count > 1:
-            for x in range(count):
-                if month + 1 < 12:
-                    month += 1
-                else:
-                    month = 1
-                    year += 1
-                month_list.append(date(year, month, 1))
-
+        month_list = self.create_month_list(month_list, count, year, month)
         return month_list

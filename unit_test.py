@@ -34,7 +34,7 @@ class Test_Scripts(unittest.TestCase):
         self.assertEqual(self.next_date_test.get_next_dates(date(2014, 5, 10), 3, 0, 3),
                          [date(2014, 6, 1), date(2014, 7, 1), date(2014, 8, 1)])
         self.assertEqual(self.next_date_test.get_next_dates(date(2014, 5, 30), 3, 1, -3),
-                         [date(2014, 7, 1), date(2014, 8, 1), date(2014, 9, 1)])
+                         [date(2014, 7, 3), date(2014, 8, 1), date(2014, 9, 1)])
 
 if __name__ == '__main__':
     unittest.main()
