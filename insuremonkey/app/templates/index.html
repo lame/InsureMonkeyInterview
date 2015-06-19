@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% csrf_token %}
+<h4>Current User Base:</h4>
+<ul>
+    {% for user in users %}
+        <li>{{user.user}}<br></li>
+    {% endfor %}
+</ul>
+<br>
+<h4>Create a New User:</h4>
+<form action="/", method="post">
+    {% csrf_token %}
+    {{ user_address_form }}
+    <input type="submit", value="Submit" />
+</form>
+<br>
+<h4>Query User:</h4>
+<form action="/", method="options">
+    {% csrf_token %}
+    {{ get_address_form }}
+    <input type="submit", value="Submit" />
+</form>
+<ul>
+    {% for address in addresses %}
+        <li>{{address.address}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
